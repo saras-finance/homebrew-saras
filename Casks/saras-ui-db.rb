@@ -9,12 +9,6 @@ cask "saras-ui-db" do
 
   app "Saras OnPrem Agent.app"
 
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-d", "-r", "com.apple.quarantine", "#{appdir}/Saras OnPrem Agent.app"],
-                   must_succeed: false
-  end
-
   zap trash: [
     "~/.saras",
     "~/Library/Application Support/com.sarasfinance.onpremagent",
