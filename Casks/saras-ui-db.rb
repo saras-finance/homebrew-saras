@@ -1,6 +1,6 @@
 cask "saras-ui-db" do
   version "0.9.8d-0.1.2"
-  sha256 "96c9511fdb59b15bc34bfc99c68951ed8eececd1d0c2e82395fe9dca6a3b92fe"
+  sha256 "4d23a649e8517328e07c39c8ad7818ba00fe7f2467b2c28c14e1a791ded133b9"
 
   url "https://publicassets.sarasfinance.com/artefacts/sarasOnPremAgent/v0.9.8d-0.1.2/darwin_arm64/saras-ui-db.dmg"
   name "Saras OnPrem Agent DuckDB"
@@ -8,6 +8,12 @@ cask "saras-ui-db" do
   homepage "https://sarasfinance.com"
 
   app "Saras OnPrem Agent.app"
+
+  postflight do
+    system_command "/usr/bin/xattr",
+                   args: ["-d", "-r", "com.apple.quarantine", "#{appdir}/Saras OnPrem Agent.app"],
+                   must_succeed: false
+  end
 
   zap trash: [
     "~/.saras",
